@@ -1,0 +1,1 @@
+Cloth will be main class. In cloth class there are 2 methods of tops and pants. For tops and pants will take arguments as color, measurements, shape,etc. Then will take 1 more class suit then will pass parameters to suit as tops and pants.  
