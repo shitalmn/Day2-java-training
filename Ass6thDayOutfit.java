@@ -1,5 +1,7 @@
 
 
+
+
 import ExceptionFiles.LargeSizeJeansNotavailableException;
 import ExceptionFiles.BeltColorNotAvailableException;
 import ExceptionFiles.JeansIsNotAvailable;
@@ -27,7 +29,7 @@ public class Ass6thDayOutfit {
 		
 		
 		try {
-			FileOutputStream fout  = new FileOutputStream("C:\\New folder\\new3.txt");
+			FileOutputStream fout  = new FileOutputStream("C:\\Users\\Student\\Desktop\\javas\\Day1\\src\\bank1.txt");
 			System.out.println("File is ready...");
 			
 			ObjectOutputStream oos = new ObjectOutputStream(fout);
@@ -64,7 +66,7 @@ public class Ass6thDayOutfit {
 		System.out.println("Object is null...");
 		
 		try {
-			FileInputStream fin  = new FileInputStream("C:\\New folder\\new3.txt");
+			FileInputStream fin  = new FileInputStream("C:\\Users\\Student\\Desktop\\javas\\Day1\\src\\bank1.txt");
 			System.out.println("File is ready..for reading.....");
 			
 			ObjectInputStream ois = new ObjectInputStream(fin);
@@ -107,10 +109,10 @@ public class Ass6thDayOutfit {
 
 class Cloth implements Serializable
 {
-	String type;
-	int quantity;
-	int amount;
-	String color;
+	private String type;
+	private int quantity;
+	private transient int  amount;
+	private String color;
 	
 	
 	
@@ -138,6 +140,176 @@ class Cloth implements Serializable
 
 
 
+
+
+	void printCloth()
+	{
+		System.out.println("---------cloth Info-------------");
+		System.out.println("cloth type"+type);
+		System.out.println("cloth color"+color);
+		System.out.println("cloth quantity"+quantity);
+		System.out.println("cloth amount"+ amount);
+		
+	}
+	
+
+}
+
+class Top extends Cloth implements Serializable
+{
+	private String topType;
+	private transient int topQuantity;
+	private String topColor;
+	
+	
+
+	public Top(String type, int quantity, int amount, String color, String topType, int topQuantity, String topColor) {
+		super(type, quantity, amount, color);
+		this.topType = topType;
+		this.topQuantity = topQuantity;
+		this.topColor = topColor;
+	}
+
+
+
+	
+
+
+	@Override
+	public String toString() {
+		return "Top [toString()=" + super.toString() + ", topType=" + topType + ", topColor=" + topColor + "]";
+	}
+
+
+
+
+
+
+	Suite make(Jeans j, Belt B)
+	{
+		if(j==null)
+		{
+			
+			JeansIsNotAvailable jeansNotAvailableEx = new JeansIsNotAvailable("Jeans is  missing to make suite");
+			throw jeansNotAvailableEx;
+		}
+		  System.out.println("For suit making we required top and jeans");
+		  System.out.println("In suit top is of" + topType + "type and quantity of top is"+topQuantity);
+		  System.out.println("In suit jeans is of"+ j.getColor()+ "and of size" + j.getSize());
+		  System.out.println("for jeans we required belt is of type " + B.getType() + "and color is" + B.getColor() +"and of size" + B.getSize());
+		  Suite suite = new Suite(5000,2);
+		  return suite;
+	}
+}
+class Jeans implements Serializable
+{
+	
+	private String color;
+	private int size;
+	public Jeans(String color, int size) {
+		super();
+		this.color = color;
+		this.size = size;
+	
+
+	if(size>34)
+	{
+		LargeSizeJeansNotavailableException largeJeansEx = new LargeSizeJeansNotavailableException("Only 28,30,32 and 34 size jeans are available............Large size jeans are not available....");
+		throw largeJeansEx;
+	}
+	
+	
+	}
+	public String getColor() {
+		return color;
+	}
+	public void setColor(String color) {
+		this.color = color;
+	}
+	public int getSize() {
+		return size;
+	}
+	public void setSize(int size) {
+		this.size = size;
+	}
+	
+	
+}
+
+class Belt implements Serializable
+{
+	private String type;
+	private String color;
+	private int size;
+	public Belt(String type, String color, int size) {
+		super();
+		this.type = type;
+		this.color = color;
+		this.size = size;
+		
+	/*	if(this.color!="Black" || this.color!="Brown" || this.color!="White")
+		{
+			BeltColorNotAvailableException beltColorEx = new BeltColorNotAvailableException ("Only Black,Brown and White belts are available............");
+			throw beltColorEx;
+		}*/
+	}
+	@Override
+	public String toString() {
+		return "Belt [type=" + type + ", color=" + color + ", size=" + size + "]";
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public String getColor() {
+		return color;
+	}
+	public void setColor(String color) {
+		this.color = color;
+	}
+	public int getSize() {
+		return size;
+	}
+	public void setSize(int size) {
+		this.size = size;
+	}
+	
+	
+	
+}
+class Suite implements Serializable
+{
+	private transient int sAmount;
+	private int squantity;
+	private int totalCost;
+	public Suite(int sAmount, int squantity) {
+		super();
+		this.sAmount = sAmount;
+		this.squantity = squantity;
+		this.totalCost = sAmount * squantity;
+	}
+	
+	
+	@Override
+	public String toString() {
+		return "Suite [sAmount=" + sAmount + ", squantity=" + squantity + ", totalCost=" + totalCost + "]";
+	}
+
+
+	void printSuiteCost() {
+		System.out.println("Total Cost of Suite " + totalCost);
+	}
+	
+	}
+
+//book class - author, no, edition, no of pages, book price
+
+//innovate comparator interface with ur uniquelly designed object
+
+//innovate treemap
+// serialize this books via hashset
 
 
 	void printCloth()
