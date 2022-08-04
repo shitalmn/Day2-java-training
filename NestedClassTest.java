@@ -1,4 +1,5 @@
-package ExceptionFiles;
+
+
 
 
 
@@ -22,9 +23,9 @@ public class NestedClassTest {
 		s1.setAdvancedAmount(1200);
 		s1.setRemaniningBalance(5000);
 		
-		
+		h.roomAllocation();
 	
-	
+		System.out.println(s1);
 	}
 }
 
@@ -52,11 +53,6 @@ class Hostel
 		rooms.setRoomAvailable(activate);
 	}
 	
-	void roomAllocationDone(boolean deActivate)
-	{
-		System.out.println("Room allocation done....");
-		rooms.setRoomAvailable(deActivate);
-	}
 	
 	
 
@@ -67,24 +63,27 @@ class Hostel
 	}
 
 	void roomAllocation() {
-		if(rooms.isRoomAvailable()==false || room<=20) {
+		if(rooms.isRoomAvailable()==false || room>=20) {
 			throw new RuntimeException("No rooms are available...");
 		}
 		else {
 			
-			room++;
+			
 			rooms.setAllocateRoom(room);
 			
-			System.out.println("Room allocation is done...");
+			
 			
 			System.out.println("allocated room is"+ rooms.getAllocateRoom());
+			room++;
+			
+			System.out.println("Room allocation is done...");
 		}
 	}
 	
-	public static class StudData // can be referred via BankAccount.Statement
+	public static class StudData 
 	{
-		private RoomsAvailable rooms;
-		int roomNo = rooms.getAllocateRoom();
+		
+		int roomNo ;
 		LocalDate allocationDate;
 		String studName;
 		String studYear;
@@ -146,18 +145,18 @@ class Hostel
 		
 	}
 	
-	private class RoomsAvailable //private nested class
+	private class RoomsAvailable 
 	{
-		boolean roomAvailable; //false
-		int allocateRoom = 1 ;
-		int deposit; 
+		boolean roomAvailable =true; 
+		int allocateRoom  ;
+	
 		
 		
 		public RoomsAvailable(boolean roomAvailable, int allocateRoom, int deposit) {
 			super();
 			this.roomAvailable = roomAvailable;
 			this.allocateRoom = allocateRoom;
-			this.deposit = deposit;
+			
 		}
 
 
@@ -186,16 +185,7 @@ class Hostel
 
 
 
-		public int getDeposit() {
-			return deposit;
-		}
-
-
-
-		public void setDeposit(int deposit) {
-			this.deposit = deposit;
-		}
-
+	
 
 
 		
@@ -204,4 +194,5 @@ class Hostel
 		
 	}
 }
+
 
